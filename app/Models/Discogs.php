@@ -11,7 +11,7 @@ class Discogs {
     try {
 
       $client = new GuzzleHttp\Client(['headers' => [ 'Authorization' => 'Discogs token='.$token]]);
-      $res = $client->request('GET', 'https://api.discogs.com/users/'.$username.'/collection/folders/0/releases?page='.$page.'&per_page=12');
+      $res = $client->request('GET', 'https://api.discogs.com/users/'.$username.'/collection/folders/0/releases?page='.$page.'&per_page=25');
       $data = json_decode($res->getBody(), true);
 
       return self::formatData($data);
@@ -35,14 +35,19 @@ class Discogs {
 
       $formattedRelease['title'] = $release['basic_information']['title'];
       $formattedRelease['thumb'] = $release['basic_information']['thumb'];
-      $formattedRelease['year'] = $release['basic_information']['year'];
+
+      if ($release['basic_information']['year'] === 0) {
+        $formattedRelease['year'] = '';
+      } else {
+        $formattedRelease['year'] = $release['basic_information']['year'];
+      }
 
       $artistString = '';
       foreach ($release['basic_information']['artists'] AS $artist) {
-        $artistString = $artistString.$artist['name'].',';
+        $artistString = $artistString.$artist['name'].', ';
       }
 
-      $formattedRelease['artists'] = rtrim($artistString,',');
+      $formattedRelease['artists'] = rtrim($artistString,', ');
       $fomattedData['releases'][] = $formattedRelease;
     }
 
