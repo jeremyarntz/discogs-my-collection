@@ -11,8 +11,8 @@
 |
 */
 
-//Route::get('/{page}', 'IndexController@index');
-Route::controller('/', 'IndexController');
+Route::get('/{page?}', 'IndexController@index');
+//Route::controller('/', 'IndexController');
 //{page}
 
 /*
