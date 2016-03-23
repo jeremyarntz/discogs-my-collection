@@ -1,6 +1,6 @@
-@foreach ($releases as $release)
+@foreach ($releases['releases'] as $release)
   <div>
-    <img src="{{ $release['basic_information']['thumb'] }}" height="50px" width="50px" />
-    {{ $release['basic_information']['artists'][0]['name'] }} - {{ $release['basic_information']['title'] }}
+    <img src="{{ $release['thumb'] }}" height="50px" width="50px" />
+    {{ $release['artists'] }} - {{ $release['title'] }} {{ $release['year'] }}
   </div>
 @endforeach

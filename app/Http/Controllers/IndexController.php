@@ -13,10 +13,10 @@ class IndexController extends Controller
   {
     $username = Config::get('discogs.username');
     $token = Config::get('discogs.token');
-    $data = Discogs::getMyData($username, $token, $page);
+    $data = Discogs::getCollection($username, $token, $page);
 
     if ($data) {
-      return view('index', ['releases' => $data['releases']]);
+      return view('index', ['releases' => $data]);
     }else{
       return view('error');
     }
