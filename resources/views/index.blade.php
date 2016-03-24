@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+  @foreach ($data['folders'] as $folder)
+    <a href="/{{ $folder['id'] }}/1/">{{ $folder['name'] }}</a>
+  @endforeach
+
   <table class="table table-striped">
     <thead>
       <tr>
@@ -10,7 +14,7 @@
         <th>Year</th>
       </tr>
     </thead>
-  @foreach ($releases['releases'] as $release)
+  @foreach ($data['collection']['releases'] as $release)
     <tr>
       <td><img src="{{ $release['thumb'] }}" height="50px" width="50px" /></td>
       <td>{{ $release['title'] }}</td>
@@ -22,11 +26,11 @@
 
   <div style="text-align: center;">
     <ul class="pagination" style="display: inline-block;">
-    @for ($i = 1; $i <= $releases['pages']; $i++)
-      @if ($i === $releases['page'])
+    @for ($i = 1; $i <= $data['collection']['pages']; $i++)
+      @if ($i === $data['collection']['page'])
         <li class="active"><a href="/{{ $i }}">{{ $i }}</a></li>
       @else
-        <li><a href="/{{ $i }}">{{ $i }}</a></li>
+        <li><a href="/{{ $data['collection']['folder'] }}/{{ $i }}">{{ $i }}</a></li>
       @endif
     @endfor
     </ul>

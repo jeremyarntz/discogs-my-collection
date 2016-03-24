@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/{page?}', 'IndexController@index');
+Route::get('/{folder?}/{page?}', 'IndexController@index');
 //Route::controller('/', 'IndexController');
 //{page}
 

@@ -7,26 +7,37 @@ use GuzzleHttp\Exception\RequestException;
 
 class Discogs {
 
-  public static function getCollection($username, $token, $page){
-    try {
+  public static function getCollection($username, $token, $folder, $page){
 
-      $client = new GuzzleHttp\Client(['headers' => [ 'Authorization' => 'Discogs token='.$token]]);
-      $res = $client->request('GET', 'https://api.discogs.com/users/'.$username.'/collection/folders/0/releases?page='.$page.'&per_page=25');
-      $data = json_decode($res->getBody(), true);
+    $data = self::getFolderCollection($username, $token, $folder, $page);
+    $folderData = self::getFolders($username, $token);
 
-      return self::formatData($data);
-
-    } catch (RequestException $e) {
+    if (!$data || !$folderData) {
       return false;
     }
+
+    return array( 'folders' => self::formatFolderData($folderData),
+                  'collection' => self::formatCollectionData($data, $folder)
+                );
   }
 
-  private static function formatData($data){
+  public static function getFolderCollection($username, $token, $folder, $page){
+    $url = 'https://api.discogs.com/users/'.$username.'/collection/folders/'.$folder.'/releases?page='.$page.'&per_page=25';
+    return self::makeApiCall($token, $url);
+  }
+
+  public static function getFolders($username, $token){
+    $url = 'https://api.discogs.com/users/'.$username.'/collection/folders';
+    return self::makeApiCall($token, $url);
+  }
+
+  private static function formatCollectionData($data, $folder){
     $fomattedData = array();
 
     // pagination
     $fomattedData['page'] = $data['pagination']['page'];
     $fomattedData['pages'] = $data['pagination']['pages'];
+    $fomattedData['folder'] = $folder;
 
     // releases
     $fomattedData['releases'] = array();
@@ -52,6 +63,32 @@ class Discogs {
     }
 
     return $fomattedData;
+  }
+
+  private static function formatFolderData($folders){
+
+    // removing the uncatagorized folder.
+    foreach($folders['folders'] AS $key => $folder){
+      if($folder['id'] === 1) {
+        unset($folders['folders'][$key]);
+      }
+    }
+
+    return $folders['folders'];
+  }
+
+  public static function makeApiCall($token, $url){
+    try {
+
+      $client = new GuzzleHttp\Client(['headers' => [ 'Authorization' => 'Discogs token='.$token]]);
+      $res = $client->request('GET', $url);
+      $data = json_decode($res->getBody(), true);
+
+      return $data;
+
+    } catch (RequestException $e) {
+      return false;
+    }
   }
 }
 ?>
