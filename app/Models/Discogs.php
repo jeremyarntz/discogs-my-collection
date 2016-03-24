@@ -23,6 +23,7 @@ class Discogs {
 
   public static function getFolderCollection($username, $token, $folder, $page){
     $url = 'https://api.discogs.com/users/'.$username.'/collection/folders/'.$folder.'/releases?page='.$page.'&per_page=25';
+    $url = $url.'&sort=artist';
     return self::makeApiCall($token, $url);
   }
 
