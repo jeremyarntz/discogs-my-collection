@@ -14,10 +14,11 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>&nbsp;</th>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Year</th>
+        <th width="70px">&nbsp;</th>
+        <th width="400px">Title</th>
+        <th width="400px">Artist</th>
+        <th width="230px">Format</th>
+        <th style="width: 70px; text-align: center;">Year</th>
       </tr>
     </thead>
   @foreach ($data['collection']['releases'] as $release)
@@ -25,7 +26,8 @@
       <td><img src="{{ $release['thumb'] }}" height="50px" width="50px" /></td>
       <td>{{ $release['title'] }}</td>
       <td>{{ $release['artists'] }}</td>
-      <td>{{ $release['year'] }}</td>
+      <td>{{ $release['format'] }}</td>
+      <td style="text-align: center;">{{ $release['year'] }}</td>
     </tr>
   @endforeach
   </table>

@@ -47,18 +47,31 @@ class Discogs {
       $formattedRelease['title'] = $release['basic_information']['title'];
       $formattedRelease['thumb'] = $release['basic_information']['thumb'];
 
+      // year
       if ($release['basic_information']['year'] === 0) {
         $formattedRelease['year'] = '';
       } else {
         $formattedRelease['year'] = $release['basic_information']['year'];
       }
 
+      // artists
       $artistString = '';
       foreach ($release['basic_information']['artists'] AS $artist) {
         $artistString = $artistString.$artist['name'].', ';
       }
-
       $formattedRelease['artists'] = rtrim($artistString,', ');
+
+      // formats
+      $formatString = '';
+      foreach ($release['basic_information']['formats'] AS $formats) {
+        foreach($formats['descriptions'] AS $description){
+          $formatString = $formatString.$description.' ';
+        }
+        $formatString = rtrim($formatString, ' ');
+        $formatString = $formatString.', ';
+      }
+      $formattedRelease['format'] = rtrim($formatString,', ');
+
       $fomattedData['releases'][] = $formattedRelease;
     }
 
