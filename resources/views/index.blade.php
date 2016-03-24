@@ -1,9 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
+  <div class="btn-group" role="group" aria-label="...">
   @foreach ($data['folders'] as $folder)
-    <a href="/{{ $folder['id'] }}/1/">{{ $folder['name'] }}</a>
+    @if ($folder['id'] == $data['collection']['folder'])
+      <a class="btn btn-primary" href="#" role="button">{{ $folder['name'] }}</a>
+    @else
+      <a class="btn btn-default" href="/{{ $folder['id'] }}/1/" role="button">{{ $folder['name'] }}</a>
+    @endif
   @endforeach
+  </div>
 
   <table class="table table-striped">
     <thead>
