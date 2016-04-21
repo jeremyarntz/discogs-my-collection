@@ -1,1 +1,6 @@
-example.discogs.php
+<?php
+
+return [
+  'username' => '',
+  'token' => '',
+];
