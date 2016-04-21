@@ -31,6 +31,7 @@
         <a href="/recent/songs">Top Songs</a>
       </div>
     </div>
+    
     <div style="width: 960px; margin: 0 auto;">
         @yield('content')
     </div>

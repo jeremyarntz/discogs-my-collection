@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::get('/recent/albums/{page?}', 'LastfmController@albums');
 Route::get('/recent/artists/{page?}', 'LastfmController@artists');
 Route::get('/recent/songs/{page?}', 'LastfmController@tracks');

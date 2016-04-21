@@ -25,7 +25,7 @@ class Discogs {
     {
         try {
             $client = new GuzzleHttp\Client(['headers' => [ 'Authorization' => 'Discogs token='.$this->token]]);
-            $res = $client->request('GET', 'https://api.discogs.com/users/'.$this->username.'/collection/folders/0/releases?page='.$page.'&per_page=25');
+            $res = $client->request('GET', 'https://api.discogs.com/users/'.$this->username.'/collection/folders/0/releases?page='.$page.'&per_page=15');
             $data = json_decode($res->getBody(), true);
 
             return $data;

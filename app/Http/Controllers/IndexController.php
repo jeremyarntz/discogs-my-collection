@@ -20,13 +20,13 @@ class IndexController extends Controller
     $this->discogs = new Discogs($token, $username);
   }
 
-  public function index($page=1)
+  public function index($folder=0, $page=1)
   {
 
     $data = $this->discogs->getCollection($page);
 
     if ($data) {
-      return view('index', ['releases' => $data]);
+      return view('index', ['data' => $data]);
     }else{
       return view('error');
     }
