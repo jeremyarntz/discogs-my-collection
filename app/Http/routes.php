@@ -15,7 +15,7 @@ Route::get('/recent/albums/{page?}', 'LastfmController@albums');
 Route::get('/recent/artists/{page?}', 'LastfmController@artists');
 Route::get('/recent/songs/{page?}', 'LastfmController@tracks');
 Route::get('/recent/{page?}', 'LastfmController@recent');
-Route::get('/{page?}', 'IndexController@index');
+Route::get('/{folder?}/{page?}', 'IndexController@index');
 
 /*
 |--------------------------------------------------------------------------

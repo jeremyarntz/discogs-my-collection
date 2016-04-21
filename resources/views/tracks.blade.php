@@ -28,7 +28,7 @@
                 @if ($i == $data['pagination']['page'])
                     <li class="active"><a href="/recent/songs/{{ $i }}">{{ $i }}</a></li>
                 @else
-                    <li><a href="/recent/{{ $i }}">{{ $i }}</a></li>
+                    <li><a href="/recent/songs/{{ $i }}">{{ $i }}</a></li>
                 @endif
             @endif
         @endfor

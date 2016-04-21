@@ -19,16 +19,16 @@
     	</tr>
   	@endforeach
   	</table>
-  	
+
 	@if ($data['pagination']['totalPages'] > 1)
    	<div style="text-align: center;">
     	<ul class="pagination" style="display: inline-block;">
     	@for ($i = 1; $i <= $data['pagination']['totalPages']; $i++)
     		@if ($i <= 20)
       			@if ($i == $data['pagination']['page'])
-        			<li class="active"><a href="/recent/songs/{{ $i }}">{{ $i }}</a></li>
+        			<li class="active"><a href="/recent/albums/{{ $i }}">{{ $i }}</a></li>
       			@else
-        			<li><a href="/recent/{{ $i }}">{{ $i }}</a></li>
+        			<li><a href="/recent/albums/{{ $i }}">{{ $i }}</a></li>
       			@endif
       		@endif
     	@endfor

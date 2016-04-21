@@ -23,7 +23,7 @@ class IndexController extends Controller
   public function index($folder=0, $page=1)
   {
 
-    $data = $this->discogs->getCollection($page);
+    $data = $this->discogs->getCollection($folder, $page);
 
     if ($data) {
       return view('index', ['data' => $data]);
