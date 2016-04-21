@@ -5,8 +5,32 @@
     <title>My Collection</title>
   </head>
   <body>
-
     <div style="width: 960px; margin: 0 auto;">Header</div>
+    <div style="width: 960px; margin: 0 auto;">
+      <div style="float: left; width: 20%;">
+        <a href="/">My Collection</a>
+      </div>
+
+      <div style="float: left; width: 20%;">
+        What I'm listening to:
+      </div> 
+
+      <div style="float: left; width: 15%; text-align: center;">
+        <a href="/recent">Recent Songs</a>
+      </div>
+
+      <div style="float: left; width: 15%; text-align: center;">
+        <a href="/recent/albums">Top Albums</a>
+      </div>
+
+      <div style="float: left; width: 15%; text-align: center;">
+        <a href="/recent/artists">Top Artists</a>
+      </div>
+
+      <div style="float: left; width: 15%; text-align: center;">
+        <a href="/recent/songs">Top Songs</a>
+      </div>
+    </div>
     <div style="width: 960px; margin: 0 auto;">
         @yield('content')
     </div>

@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Config;
 //use Cache;
-use \App\Models\Discogs;
+use \App\Services\Discogs;
 
 class IndexController extends Controller
 {
-  public function index($page=1)
+
+  private $discogs;
+
+  function __construct()
   {
     $username = Config::get('discogs.username');
     $token = Config::get('discogs.token');
-    $data = Discogs::getCollection($username, $token, $page);
+
+    $this->discogs = new Discogs($token, $username);
+  }
+
+  public function index($page=1)
+  {
+
+    $data = $this->discogs->getCollection($page);
 
     if ($data) {
       return view('index', ['releases' => $data]);

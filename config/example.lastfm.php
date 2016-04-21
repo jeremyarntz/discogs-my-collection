@@ -2,5 +2,5 @@
 
 return [
   'username' => '',
-  'token' => '',
+  'key' => '',
 ];
